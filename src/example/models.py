@@ -44,6 +44,27 @@ class Mascota(BaseModel):
         DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC)
     )
 
+class TipoVehiculo(StrEnum):
+    MOTO = auto()
+    AUTO = auto()
+    CAMION = auto()
+
+class Vehiculo(BaseModel):
+    __tablename__ = "vehiculos"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    patente: Mapped[str] = mapped_column(String, index=True)
+    tipo: Mapped[TipoVehiculo] = mapped_column(String) 
+    tutor_id: Mapped[int] = mapped_column(
+        ForeignKey("personas.id")
+    )  # Foreign key a Persona
+    tutor: Mapped[Persona] = relationship("Persona", back_populates="vehiculos")
+    fecha_creacion: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
+    fecha_modificacion: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC)
+    )
+        
+
     @property
     def nombre_tutor(self):
         return self.tutor.nombre

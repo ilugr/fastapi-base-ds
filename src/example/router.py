@@ -63,3 +63,31 @@ def update_mascota(
 @router.delete("/mascotas/{mascota_id}", response_model=schemas.Mascota)
 def delete_mascota(mascota_id: int, db: Session = Depends(get_db)):
     return services.eliminar_mascota(db, mascota_id)
+
+#router para vehiculo
+
+@router.post("/vehiculo", response_model=schemas.Vehiculo)
+def create_vehiculo(vehiculo: schemas.VehiculoCreate, db: Session = Depends(get_db)):
+    return services.crear_vehiculo(db, vehiculo)
+
+
+@router.get("/vehiculo", response_model=list[schemas.Vehiculo])
+def read_vehiculo(db: Session = Depends(get_db)):
+    return services.listar_vehiculo(db)
+
+
+@router.get("/vehiculo/{vehiculo_id}", response_model=schemas.Vehiculo)
+def read_vehiculo(vehiculo_id: int, db: Session = Depends(get_db)):
+    return services.leer_vehiculo(db, vehiculo_id)
+
+
+@router.put("/vehiculo/{vehiculo_id}", response_model=schemas.Vehiculo)
+def update_mascota(
+    vehiculo_id: int, vehiculo: schemas.VehiculotaUpdate, db: Session = Depends(get_db)
+):
+    return services.modificar_vehiculo(db, vehiculo_id, vehiculo)
+
+
+@router.delete("/vehiculo/{vehiculo_id}", response_model=schemas.Vehiculo)
+def delete_mascota(vehiculo_id: int, db: Session = Depends(get_db)):
+    return services.eliminar_vehiculo(db, vehiculo_id)
