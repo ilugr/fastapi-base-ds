@@ -82,12 +82,12 @@ def read_vehiculo(vehiculo_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/vehiculo/{vehiculo_id}", response_model=schemas.Vehiculo)
-def update_mascota(
-    vehiculo_id: int, vehiculo: schemas.VehiculotaUpdate, db: Session = Depends(get_db)
+def update_vehiculo(
+    vehiculo_id: int, vehiculo: schemas.VehiculoUpdate, db: Session = Depends(get_db)
 ):
     return services.modificar_vehiculo(db, vehiculo_id, vehiculo)
 
 
 @router.delete("/vehiculo/{vehiculo_id}", response_model=schemas.Vehiculo)
-def delete_mascota(vehiculo_id: int, db: Session = Depends(get_db)):
+def delete_vehiculo(vehiculo_id: int, db: Session = Depends(get_db)):
     return services.eliminar_vehiculo(db, vehiculo_id)

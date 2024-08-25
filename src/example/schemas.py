@@ -66,10 +66,6 @@ class Mascota(MascotaBase):
 
     #vehiculos
 
-
-
-
-
 class VehiculoBase(BaseModel):
     nombre: str
     tipo: TipoVehiculo  # solo permitiremos valores de este tipo.
